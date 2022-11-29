@@ -1,0 +1,128 @@
+---
+params:
+  answers: true # or leave it blank for false
+output: 
+  pdf_document:
+    keep_tex: false
+    fig_caption: yes
+    latex_engine: pdflatex
+    template: hj_assignment_template.tex    
+geometry: margin=1in,a4paper
+answers: "`r params$answers`"
+modulecode: "SM-1402"
+title: "MOD-1234: Module Title"
+semester: 
+duedate: 
+fontsize: 11pt
+header-includes:
+   - \linespread{1.05}
+   - \usepackage{lipsum}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  message = FALSE,
+  warning = FALSE,
+  fig.height = 3, 
+  fig.width = 6,
+  fig.align = "center", 
+  fig.path = "figure/",
+  cache = FALSE, 
+  cache.path = "_cache/"
+)
+library(tidyverse)
+library(cowplot)
+theme_set(theme_classic())
+
+navyblue <- "#002f5c"
+solidpink <- "#8E3B46"
+```
+
+```{=latex}
+% Settings for exam package
+% \checkboxchar{{$\Box$}}
+\marksnotpoints
+\pointformat{\textbf{[\thepoints]}}
+% \pointsdroppedatright
+% \bonuspointpoints{bonus point}{bonus marks}
+% \pointsinrightmargin
+% \bracketedpoints
+% \runningheadrule
+
+\pagestyle{headandfoot}
+\firstpageheader{}{}{}
+\runningheader{}{}{}
+\firstpagefooter{}{\thepage\ of \numpages}{}
+\runningfooter{}{\thepage\ of \numpages}{}
+```
+
+::::: {.questions latex=""}
+
+\question \lipsum[1][1-5]
+
+:::: {.parts latex=""}
+
+\part{} \lipsum[1][6-8]
+
+::: {.solution latex=""}
+ 
+\lipsum[1][9-11]
+
+:::
+
+\part{} \lipsum[2][6-8]
+
+::: {.solution latex=""}
+ 
+\lipsum[2][9-11]
+
+:::
+
+\part{} \lipsum[3][6-8]
+
+::: {.solution latex=""}
+ 
+\lipsum[3][9-11]
+
+:::
+
+::::
+
+\question We can even write R code and include them in the solutions.
+
+```{r eval = FALSE}
+ggplot(tibble(x = 1:5, y = 1:5), aes(x, y)) +
+  geom_point()
+```
+
+::: {.solution latex=""}
+ 
+```{r include = params$answers}
+ggplot(tibble(x = 1:5, y = 1:5), aes(x, y)) +
+  geom_point()
+```
+
+:::
+
+:::::
+
+
+# Questions with marks
+
+::::: {.questions latex=""}
+
+\question[5] \lipsum[6][1-5]
+
+:::::
+
+# Using fancy questions
+
+:::: {.fancyquestion latex=""}
+
+This is an example of a fancy question.
+
+::::
+
+
+
